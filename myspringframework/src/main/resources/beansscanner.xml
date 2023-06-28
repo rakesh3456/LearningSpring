@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+       <!--      Activate all AnnoationBean Post Processors-->
+      <context:annotation-config/>
+
+    <bean id="address" class="com.ibm.spring.app.annotations.Address">
+             <property name="city" value="Coimbatore"/>
+    </bean>
+    <bean id="student" class="com.ibm.spring.app.annotations.Customer">
+            <property name="id" value="1"/>
+            <property name="name" value="Subramanian"/>
+    </bean>
+</beans>

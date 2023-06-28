@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+        <bean id="hello" class="com.ibm.spring.app.HelloWorld" />
+
+<!--    Setter injection-->
+    <bean id="address" class="com.ibm.spring.app.di.Address">
+        <property name="city" value="coimbatore"></property>
+    </bean>
+<!--    Manual di via setter-->
+      <bean id="customer" class="com.ibm.spring.app.di.Customer">
+            <property name="customerId" value="10"/>
+            <property name="name" value="Subramanian"/>
+            <property name="address" ref="address"/>
+      </bean>
+
+<!-- Manual configuration via constructor    -->
+    <bean id="newCustomer" class="com.ibm.spring.app.di.Customer">
+        <property name="customerId" value="12"/>
+        <property name="name" value="Ram"/>
+        <constructor-arg ref="address" />
+    </bean>
+    <!--auto wire configuration-->
+    <bean id="customerAuto" class="com.ibm.spring.app.di.Customer" autowire="byType">
+        <property name="customerId" value="10"/>
+        <property name="name" value="Subramanian"/>
+<!--        <property name="address" ref="address"/>-->
+    </bean>
+
+    <bean id="authService" class="com.ibm.spring.app.di.factory.AuthService"  factory-method="getInstance"/>
+
+    <!-- Single ton   -->
+    <bean id="clientService" class=" com.ibm.spring.app.di.beanscope.ClientService"/>
+     <!-- Prototype-->
+    <bean id="clientProtoService" class=" com.ibm.spring.app.di.beanscope.ClientService" scope="prototype"/>
+
+<!--    Life cyle methods-->
+    <bean id="customerLifeCycle" class="com.ibm.spring.app.beanlifecycle.CustomerService" init-method="init" destroy-method="destroy" />
+
+<!--    Bean Post processor extension-->
+    <bean class="com.ibm.spring.app.extensions.BeanPostProcessorExtension"/>
+<!--    Container Extension Processor-->
+    <bean class="com.ibm.spring.app.extensions.FactoryBeanPostProcessorExtension"/>
+</beans>
